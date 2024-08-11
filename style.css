@@ -1,0 +1,11 @@
+#map {
+    width: 100%;
+    height: 90vh;
+    
+}
+
+.navbar{
+    height: 9vh;
+    display: flex;
+    gap: 10px;
+}

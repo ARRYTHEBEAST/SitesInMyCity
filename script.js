@@ -25,7 +25,19 @@
  var marker = L.marker([16.7037394, 74.2177601]).addTo(map); //sangramsinha gaikwad statue
  var marker = L.marker([16.7032927, 74.2177269]).addTo(map); //gaikwad samadhi
  var marker = L.marker([16.7036107, 74.2182610]).addTo(map); //maratha architecture (wooden work) temple?
+ var marker = L.marker([16.717409, 74.1837]).addTo(map); // Shingnapur Bridge
+ var marker = L.marker([16.707178, 74.217496]).addTo(map); // Shivaji Pul
+ var marker = L.marker([16.69181, 74.214733]).addTo(map); // Sandhya Math
+ var marker = L.marker([16.691476, 74.214250]).addTo(map); // Ancient Grinding Wheel (Chuna/Lime)
+
  
+
+
+ function onMapClick(e) {
+    alert("You clicked the map at " + e.latlng);
+}
+
+map.on('click', onMapClick);
 
 
 

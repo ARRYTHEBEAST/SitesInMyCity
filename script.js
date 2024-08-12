@@ -22,7 +22,11 @@
  var marker = L.marker([16.6994986, 74.2117278]).addTo(map); //anugamini mandir
  var marker = L.marker([16.6966896, 74.2139182]).addTo(map); //Old Washing Place (dhobi)
  var marker = L.marker([16.6999160, 74.1945288]).addTo(map); //Laksheswar Mandir(waterfront)
+ var marker = L.marker([16.7037394, 74.2177601]).addTo(map); //sangramsinha gaikwad statue
+ var marker = L.marker([16.7032927, 74.2177269]).addTo(map); //gaikwad samadhi
+ var marker = L.marker([16.7036107, 74.2182610]).addTo(map); //maratha architecture (wooden work) temple?
  
+
 
 
 

@@ -1,11 +1,42 @@
-#map {
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     width: 100%;
-    height: 90vh;
-    
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's width and height */
 }
 
-.navbar{
-    height: 9vh;
+#map {
+    width: 100%;
+    height: 100vh;
+    position: relative; /* Keep map positioned relative to its container */
+}
+
+.navbar {
     display: flex;
     gap: 10px;
+    position: absolute; /* Position navbar over the map */
+    top: 20px; /* Distance from the top of the viewport */
+    right: 20px; /* Distance from the left of the viewport */
+    padding: 5px; /* Add padding inside the navbar for a spacious look */
+    border-radius: 20px; /* High border radius for rounded corners */
+    background-color: rgba(255, 255, 255, 0.9); /* Optional: Add a semi-transparent background */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Optional: Add shadow for better visibility */
+
+    z-index: 1000; /* Ensure it stays on top of the map */
+    box-sizing: border-box; /* Ensure padding doesn’t add to the height */
+}
+
+.navbar button {
+    padding: 10px 15px; /* Larger padding for a more spacious button */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px; /* Rounded corners for buttons */
+    cursor: pointer;
+    text-align: center; /* Center text inside the button */
+}
+
+.navbar button:hover {
+    background-color: #0056b3;
 }

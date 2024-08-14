@@ -29,6 +29,25 @@
  var marker = L.marker([16.707178, 74.217496]).addTo(map); // Shivaji Pul
  var marker = L.marker([16.69181, 74.214733]).addTo(map); // Sandhya Math
  var marker = L.marker([16.691476, 74.214250]).addTo(map); // Ancient Grinding Wheel (Chuna/Lime)
+ var marker = L.marker([16.690777, 74.242741]).addTo(map) //Shahunagar Shahu Maharaj
+ var marker = L.marker([16.686661, 74.242467]).addTo(map) //Pansare Statue
+ var marker = L.marker([16.685677063690296, 74.24476721211819]).addTo(map) //Jain Peace Fountain(not functional)
+ var marker = L.marker([ 16.678112528032145, 74.25650613438248 ]).addTo(map)  //University Shivaji Maharaj Statue
+ var marker = L.marker([ 16.68045203668232, 74.25650030391819 ]).addTo(map)  // Bhaurao Patil Statue
+ var marker = L.marker([ 16.683335386532963, 74.25358169487988 ]).addTo(map)  // University Lake Point
+ var marker = L.marker([ 16.695784408048777, 74.25683864460689 ]).addTo(map)  // Maratha Light Infantry, Kolhapur Command Entry
+ var marker = L.marker([ 16.6993747349747, 74.25449822924905 ]).addTo(map)  // Tank, Fighter Jet, WarShip scale models
+ var marker = L.marker([ 16.691389103423028, 74.24460943217142 ]).addTo(map)  // Bai Cha Putala, Mauli Putala
+ var marker = L.marker([ 16.69368046074615, 74.236330895537 ]).addTo(map)  // Koteshwar Mandir, LakeView
+ var marker = L.marker([ 16.68687874452764, 74.22941512409949 ]).addTo(map)  // Arya Samaj School, 1928
+ 
+
+
+
+
+
+
+
 
  
 

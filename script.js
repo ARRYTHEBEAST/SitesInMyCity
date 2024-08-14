@@ -40,16 +40,6 @@
  var marker = L.marker([ 16.691389103423028, 74.24460943217142 ]).addTo(map)  // Bai Cha Putala, Mauli Putala
  var marker = L.marker([ 16.69368046074615, 74.236330895537 ]).addTo(map)  // Koteshwar Mandir, LakeView
  var marker = L.marker([ 16.68687874452764, 74.22941512409949 ]).addTo(map)  // Arya Samaj School, 1928
- 
-
-
-
-
-
-
-
-
- 
 
 
  function onMapClick(e) {
@@ -57,6 +47,16 @@
 }
 
 map.on('click', onMapClick);
+
+
+// Select the About button
+const aboutButton = document.querySelector('.navbar button:nth-child(2)'); // Assuming the About button is the second one
+
+// Add an event listener for the click event
+aboutButton.addEventListener('click', function() {
+    // Redirect to the "About" page
+    window.location.href = 'about.html'; // Replace 'about.html' with the URL of the page you want to open
+});
 
 
 

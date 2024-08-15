@@ -1,7 +1,7 @@
- // Map initialization 
- var map = L.map('map').setView([16.686875, 74.2272],14);
- var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
- osm.addTo(map);
+// Map initialization 
+var map = L.map('map').setView([16.686875, 74.2272], 14);
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+osm.addTo(map);
 
 // Add your markers
 var markersData = [
@@ -58,14 +58,11 @@ markersData.forEach(function(markerData) {
     // Zoom to marker when its name is clicked in the list
     listItem.addEventListener('click', function() {
         // Zoom to the marker
-        //map.setView(markerData.coords, 15);
         map.setView([markerData.coords[0], markerData.coords[1] + 0.001], 15, {
             animate: true,
             duration: 1
         });
 
-        
-    
         // Enlarge the marker
         marker.setIcon(L.icon({
             iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
@@ -76,7 +73,7 @@ markersData.forEach(function(markerData) {
             shadowSize: [41, 41],
             shadowAnchor: [12, 41]
         }));
-    
+
         // Reset the marker size after a delay
         setTimeout(function() {
             marker.setIcon(L.icon({
@@ -92,13 +89,52 @@ markersData.forEach(function(markerData) {
     });
 });
 
+// Add search functionality
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    var searchQuery = e.target.value.toLowerCase();
+    markerNamesList.innerHTML = '';
 
- function onMapClick(e) {
-    alert("You clicked the map at " + e.latlng);
-}
+    markersData.forEach(function(markerData) {
+        if (markerData.name.toLowerCase().includes(searchQuery)) {
+            var listItem = document.createElement('li');
+            listItem.textContent = markerData.name;
 
-map.on('click', onMapClick);
+            listItem.addEventListener('click', function() {
+                // Zoom to the marker
+                map.setView([markerData.coords[0], markerData.coords[1] + 0.001], 15, {
+                    animate: true,
+                    duration: 1
+                });
 
+                // Enlarge the marker
+                marker.setIcon(L.icon({
+                    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+                    iconSize: [35, 55], // Enlarged size
+                    iconAnchor: [17, 55], // Adjusted anchor for the larger size
+                    popupAnchor: [1, -34],
+                    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+                    shadowSize: [41, 41],
+                    shadowAnchor: [12, 41]
+                }));
+
+                // Reset the marker size after a delay
+                setTimeout(function() {
+                    marker.setIcon(L.icon({
+                        iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+                        iconSize: [25, 41], // Original size
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+                        shadowSize: [41, 41],
+                        shadowAnchor: [12, 41]
+                    }));
+                }, 500); // Adjust the delay as needed
+            });
+
+            markerNamesList.appendChild(listItem);
+        }
+    });
+});
 
 // Select the About button
 const aboutButton = document.querySelector('.navbar button:nth-child(2)'); // Assuming the About button is the second one
@@ -109,6 +145,8 @@ aboutButton.addEventListener('click', function() {
     window.location.href = 'about.html'; // Replace 'about.html' with the URL of the page you want to open
 });
 
+function onMapClick(e) {
+    alert("You clicked the map at " + e.latlng);
+}
 
-
-
+map.on('click', onMapClick);

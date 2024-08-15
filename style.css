@@ -76,3 +76,18 @@ body, html {
     text-decoration: underline;
     color: #007bff;
 }
+
+
+
+#searchInput {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+
+
+

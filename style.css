@@ -16,8 +16,8 @@ body, html {
     display: flex;
     gap: 10px;
     position: absolute; /* Position navbar over the map */
-    top: 20px; /* Distance from the top of the viewport */
-    right: 20px; /* Distance from the left of the viewport */
+    top: 30px; /* Distance from the top of the viewport */
+    right: 30px;  /*Distance from the left of the viewport */
     padding: 5px; /* Add padding inside the navbar for a spacious look */
     border-radius: 20px; /* High border radius for rounded corners */
     background-color: rgba(255, 255, 255, 0.9); /* Optional: Add a semi-transparent background */
@@ -28,6 +28,7 @@ body, html {
 }
 
 .navbar button {
+    font-size: medium;
     padding: 10px 15px; /* Larger padding for a more spacious button */
     background-color: #007bff;
     color: white;
@@ -64,6 +65,7 @@ body, html {
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow: auto;
 }
 
 #markerNames li {
@@ -80,11 +82,12 @@ body, html {
 
 
 #searchInput {
-    width: 100%;
-    padding: 8px;
+    width: 16vw;
+    padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    overflow: auto;
 }
 
 

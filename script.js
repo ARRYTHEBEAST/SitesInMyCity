@@ -158,6 +158,16 @@ aboutButton.addEventListener('click', function() {
     window.location.href = 'about.html'; // Replace 'about.html' with the URL of the page you want to open
 });
 
+// Select the Home button
+const aboutHome = document.querySelector('.navbar button:nth-child(1)'); // Assuming the About button is the second one
+
+// Add an event listener for the click event
+aboutHome.addEventListener('click', function() {
+    // Redirect to the "About" page
+    window.location.href = 'home.html'; // Replace 'about.html' with the URL of the page you want to open
+});
+
+
 function onMapClick(e) {
     alert("You clicked the map at " + e.latlng);
 }

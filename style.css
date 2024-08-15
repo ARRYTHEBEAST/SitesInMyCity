@@ -40,3 +40,39 @@ body, html {
 .navbar button:hover {
     background-color: #0056b3;
 }
+
+.overlay {
+    position: absolute;
+    top: 10vh;
+    left: 2vw;
+    width: 20vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.overlay h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+#markerNames {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#markerNames li {
+    margin-bottom: 1vh;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#markerNames li:hover {
+    text-decoration: underline;
+    color: #007bff;
+}

@@ -1,3 +1,4 @@
+
 // Map initialization 
 var map = L.map('map').setView([16.686875, 74.2272], 14);
 var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
@@ -5,15 +6,27 @@ osm.addTo(map);
 
 // Add your markers
 var markersData = [
-    { coords: [16.6868981, 74.2245119], name: "ShivaMandir 1" },
-    { coords: [16.6878053, 74.2268129], name: "RadhaKrishna Mandir Old Maratha Architecture" },
+    { coords: [16.6868981, 74.2245119], name: "ShivaMandir 1" , 
+        data: "This temple is placed in the corner of a already isolated and 'sketchy' place. This temple is mostly closed and only open on core festive days for the local shiva bhakts. With average aesthic value this place does not call for a detour just to visit it. "},
+
+    { coords: [16.6878053, 74.2268129], name: "RadhaKrishna Mandir Old Maratha Architecture", 
+        data: "This temple "
+    },
+
     { coords: [16.6876496, 74.2272880], name: "Padmavati Mandir" },
+
     { coords: [16.6880179, 74.2272511], name: "GajaGanesh" },
+
     { coords: [16.6875259, 74.2285171], name: "Jayprabha Studio" },
+
     { coords: [16.6840401, 74.2319141], name: "Renuka Mandir s.1840" },
+
     { coords: [16.692538, 74.224976], name: "Mirajkar Tikti" },
+
     { coords: [16.692193, 74.224434], name: "Nurshimha Mandir 1" },
+
     { coords: [16.6918619, 74.2243293], name: "Onkareshwar Mandir Southern Script(raja Bhoj?)" },
+
     { coords: [16.6916495, 74.2307380], name: "Sathmari" },
     { coords: [16.690646, 74.229167], name: "Belbag Chowk" },
     { coords: [16.6923981, 74.2202060], name: "ardha shivaji putala" },

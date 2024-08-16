@@ -4,6 +4,7 @@ var map = L.map('map').setView([16.686875, 74.2272], 14);
 var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 osm.addTo(map);
 
+
 // Add your markers
 var markersData = [
     { coords: [16.6868981, 74.2245119], name: "ShivaMandir 1" , 
@@ -58,7 +59,7 @@ var markersData = [
 
 const aboutButton = document.querySelector('.navbar button:nth-child(2)'); // Assuming the About button is the second one
 const homeButton = document.querySelector('.navbar button:nth-child(1)'); // Assuming the Home button is the second one
-
+const mapButton = document.querySelector('.navbar button:nth-child(3)');
 // Add an event listener for the click event
 aboutButton.addEventListener('click', function() {
     // Redirect to the "about" page
@@ -70,6 +71,18 @@ homeButton.addEventListener('click', function() {
     // Redirect to the "about" page
     window.location.href = 'home.html'; // Replace 'about.html' with the URL of the page you want to open
 
+});
+
+// Create the tile layer
+var tileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+
+// Add event listener to the button
+mapButton.addEventListener('click', function() {
+    if (map.hasLayer(tileLayer)) {
+        map.removeLayer(tileLayer); // Remove the layer if it's already added
+    } else {
+        tileLayer.addTo(map); // Add the layer if it's not already added
+    }
 });
 
 

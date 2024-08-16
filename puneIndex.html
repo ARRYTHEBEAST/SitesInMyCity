@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Pune</title>
+    <link rel="stylesheet" href="puneStyle.css">
+    <!-- leaflet css  -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="kolhapurStyle.css">
+</head>
+<body>
+    <div class="navbar">
+        <button>Home</button>
+        <button>About</button>
+        <button>Map</button>
+     </div>
+     <div id="map"></div>
+     <div id="marker-list" class="overlay">
+         <h2>Sites</h2>
+         <input type="text" id="searchInput" placeholder="Search markers...">
+         <ul id="markerNames"></ul>
+     </div>
+     <div id="info-overlay" class="info-overlay">
+         <button id="back-button">Back</button>
+         <button id="close-button">Close</button>
+         <h2 id="marker-title"></h2>
+         <p id="marker-info"></p>
+     </div>
+</body>
+</html>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script src="puneScript.js"></script>

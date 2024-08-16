@@ -4,7 +4,7 @@ const kolhapurButton = document.querySelector('.citySelection button:nth-child(1
 // Add an event listener for the click event
 kolhapurButton.addEventListener('click', function() {
     // Redirect to the "index" page
-    window.location.href = 'index.html'; // Replace 'about.html' with the URL of the page you want to open
+    window.location.href = 'kolhapurIndex.html'; // Replace 'about.html' with the URL of the page you want to open
 
 });
 
@@ -14,6 +14,6 @@ const puneButton = document.querySelector('.citySelection button:nth-child(2)');
 // Add an event listener for the click event
 puneButton.addEventListener('click', function() {
     // Redirect to the "index" page
-    window.location.href = 'index.html'; // Replace 'about.html' with the URL of the page you want to open
+    window.location.href = 'puneIndex.html'; // Replace 'about.html' with the URL of the page you want to open
     
 });

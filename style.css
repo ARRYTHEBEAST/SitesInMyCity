@@ -16,8 +16,8 @@ body, html {
     display: flex;
     gap: 10px;
     position: absolute; /* Position navbar over the map */
-    top: 30px; /* Distance from the top of the viewport */
-    right: 30px;  /*Distance from the left of the viewport */
+    top: 2vh; /* Distance from the top of the viewport */
+    right: 2vw;  /*Distance from the left of the viewport */
     padding: 5px; /* Add padding inside the navbar for a spacious look */
     border-radius: 20px; /* High border radius for rounded corners */
     background-color: rgba(255, 255, 255, 0.9); /* Optional: Add a semi-transparent background */
@@ -54,6 +54,7 @@ body, html {
     border-radius: 10px;
     box-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.3);
     z-index: 1000;
+    
 }
 
 .overlay h2 {
@@ -92,5 +93,22 @@ body, html {
 
 
 
+
+.info-overlay {
+    position: absolute;
+    top: 10vh;
+    right: 2vw;
+    width: auto;
+    height: auto;
+    max-width: 20vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    display: none;
+}
 
 

@@ -25,7 +25,7 @@ var markersData = [
 
     { coords: [16.692193, 74.224434], name: "Nurshimha Mandir 1" },
 
-    { coords: [16.6918619, 74.2243293], name: "Onkareshwar Mandir Southern Script(raja Bhoj?)" },
+    { coords: [16.6918619, 74.2243293], name: "Onkareshwar Mandir Southern Script(raja Bhoj?)" , data: "this is data"},
 
     { coords: [16.6916495, 74.2307380], name: "Sathmari" },
     { coords: [16.690646, 74.229167], name: "Belbag Chowk" },
@@ -56,8 +56,32 @@ var markersData = [
     { coords: [16.68687874452764, 74.22941512409949], name: "Arya Samaj School, 1928" },
 ];
 
+const aboutButton = document.querySelector('.navbar button:nth-child(2)'); // Assuming the About button is the second one
+const homeButton = document.querySelector('.navbar button:nth-child(1)'); // Assuming the Home button is the second one
+
+// Add an event listener for the click event
+aboutButton.addEventListener('click', function() {
+    // Redirect to the "about" page
+    window.location.href = 'about.html'; // Replace 'about.html' with the URL of the page you want to open
+
+});
+// Add an event listener for the click event
+homeButton.addEventListener('click', function() {
+    // Redirect to the "about" page
+    window.location.href = 'home.html'; // Replace 'about.html' with the URL of the page you want to open
+
+});
+
+
 // Get the markerNames element
 var markerNamesList = document.getElementById('markerNames');
+var infoOverlay = document.getElementById('info-overlay');
+var markerTitle = document.getElementById('marker-title');
+var markerInfo = document.getElementById('marker-info');
+var backButton = document.getElementById('back-button');
+var closeButton = document.getElementById('close-button');
+
+var currentMarker = null;
 
 // Add markers and their names to the list
 markersData.forEach(function(markerData) {
@@ -75,6 +99,15 @@ markersData.forEach(function(markerData) {
             animate: true,
             duration: 1
         });
+
+        // Store the clicked marker's name in currentMarker
+        currentMarker = markerData.name;
+
+        // Show the overlay and update its content
+        markerTitle.textContent = markerData.name;
+        markerInfo.textContent = markerData.data || "No additional information available.";
+
+        infoOverlay.style.display = 'block';
 
         // Enlarge the marker
         marker.setIcon(L.icon({
@@ -102,6 +135,17 @@ markersData.forEach(function(markerData) {
     });
 });
 
+// Close button functionality
+closeButton.addEventListener('click', function() {
+    infoOverlay.style.display = 'none';
+});
+
+// Back button functionality
+backButton.addEventListener('click', function() {
+    infoOverlay.style.display = 'none';
+});
+
+
 // Add search functionality
 document.getElementById('searchInput').addEventListener('input', function(e) {
     var searchQuery = e.target.value.toLowerCase();
@@ -118,6 +162,10 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
                     animate: true,
                     duration: 1
                 });
+
+                currentMarker = markerData.name
+
+                
 
                 // Enlarge the marker
                 marker.setIcon(L.icon({
@@ -149,27 +197,3 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
     });
 });
 
-// Select the About button
-const aboutButton = document.querySelector('.navbar button:nth-child(2)'); // Assuming the About button is the second one
-
-// Add an event listener for the click event
-aboutButton.addEventListener('click', function() {
-    // Redirect to the "About" page
-    window.location.href = 'about.html'; // Replace 'about.html' with the URL of the page you want to open
-});
-
-// Select the Home button
-const aboutHome = document.querySelector('.navbar button:nth-child(1)'); // Assuming the About button is the second one
-
-// Add an event listener for the click event
-aboutHome.addEventListener('click', function() {
-    // Redirect to the "About" page
-    window.location.href = 'home.html'; // Replace 'about.html' with the URL of the page you want to open
-});
-
-
-function onMapClick(e) {
-    alert("You clicked the map at " + e.latlng);
-}
-
-map.on('click', onMapClick);

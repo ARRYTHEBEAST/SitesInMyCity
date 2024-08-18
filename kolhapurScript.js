@@ -89,9 +89,13 @@ var tileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/service
 mapButton.addEventListener('click', function() {
     if (map.hasLayer(tileLayer)) {
         map.removeLayer(tileLayer); // Remove the layer if it's already added
+        mapButton.innerHTML = "Street View"
     } else {
         tileLayer.addTo(map); // Add the layer if it's not already added
+        mapButton.innerHTML = "Satellite View"
+
     }
+    
 });
 
 

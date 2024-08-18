@@ -55,6 +55,8 @@ var markersData = [
     { coords: [16.691389103423028, 74.24460943217142], name: "Bai Cha Putala, Mauli Putala" },
     { coords: [16.69368046074615, 74.236330895537], name: "Koteshwar Mandir, LakeView" },
     { coords: [16.68687874452764, 74.22941512409949], name: "Arya Samaj School, 1928" },
+    { coords: [16.791012471115316, 74.19121417050346], name: "Pohale Caves" },
+
 ];
 
 const aboutButton = document.querySelector('.navbar button:nth-child(2)'); // Assuming the About button is the second one
@@ -121,7 +123,7 @@ markersData.forEach(function(markerData) {
     // Zoom to marker when its name is clicked in the list
     listItem.addEventListener('click', function() {
         // Zoom to the marker
-        map.setView([markerData.coords[0], markerData.coords[1] + 0.001], 15, {
+        map.setView([markerData.coords[0], markerData.coords[1]], 19, {
             animate: true,
             duration: 1
         });

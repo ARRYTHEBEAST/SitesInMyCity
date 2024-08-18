@@ -112,3 +112,18 @@ body, html {
 }
 
 
+.references {
+    position: absolute;
+    top: 85vh;
+    right: 2vw;
+    width: 20vw;
+    max-height: 80vh;
+    max-width: 100px;
+    overflow-y: auto;
+    padding: 2vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    
+}

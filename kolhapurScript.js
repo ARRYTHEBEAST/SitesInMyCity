@@ -60,6 +60,15 @@ var markersData = [
 const aboutButton = document.querySelector('.navbar button:nth-child(2)'); // Assuming the About button is the second one
 const homeButton = document.querySelector('.navbar button:nth-child(1)'); // Assuming the Home button is the second one
 const mapButton = document.querySelector('.navbar button:nth-child(3)');
+const referenceButton = document.querySelector('.references button:nth-child(1)');
+
+// Add an event listener for the click event
+referenceButton.addEventListener('click', function() {
+    // Redirect to the "about" page
+    window.location.href = 'reference.html'; // Replace 'about.html' with the URL of the page you want to open
+
+});
+
 // Add an event listener for the click event
 aboutButton.addEventListener('click', function() {
     // Redirect to the "about" page

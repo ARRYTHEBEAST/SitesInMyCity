@@ -4,24 +4,26 @@ var map = L.map('map').setView([16.686875, 74.2272], 14);
 var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 osm.addTo(map);
 
+var timePeriods = ['Old', 'Recent', 'Ancient', 'Mideaval']
 
 // Add your markers
 var markersData = [
     {
         coords: [16.6868981, 74.2245119], name: "ShivaMandir 1",
         data: "This temple is placed in the corner of a already isolated and 'sketchy' place. This temple is mostly closed and only open on core festive days for the local shiva bhakts. With average aesthic value this place does not call for a detour just to visit it. "
+        , categories: ['Temple', 'Recent', 'Architecture']
     },
 
     {
         coords: [16.6878053, 74.2268129], name: "RadhaKrishna Mandir Old Maratha Architecture",
-        data: "This temple "
+        data: "This temple ", categories: ['Temple', 'Mideaval', 'Architecture', 'Religious']
     },
 
-    { coords: [16.6876496, 74.2272880], name: "Padmavati Mandir" },
+    { coords: [16.6876496, 74.2272880], name: "Padmavati Mandir", categories: ['Temple', 'Mideaval', 'Religious'] },
 
-    { coords: [16.6880179, 74.2272511], name: "GajaGanesh" },
+    { coords: [16.6880179, 74.2272511], name: "GajaGanesh",categories:['Temple', 'Recent'] },
 
-    { coords: [16.6875259, 74.2285171], name: "Jayprabha Studio" },
+    { coords: [16.6875259, 74.2285171], name: "Jayprabha Studio", categories:['Heritage', 'Old'] },
 
     { coords: [16.6840401, 74.2319141], name: "Renuka Mandir s.1840" },
 
@@ -84,7 +86,7 @@ var markersData = [
     { coords: [16.69368046074615, 74.236330895537], name: "Koteshwar Mandir, LakeView" },
 
     { coords: [16.68687874452764, 74.22941512409949], name: "Arya Samaj School, 1928" },
-    
+
     { coords: [16.791012471115316, 74.19121417050346], name: "Pohale Caves" },
 
 ];

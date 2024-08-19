@@ -97,6 +97,7 @@ mapButton.addEventListener('click', function() {
         mapButton.innerHTML = "Satellite View"
 
     }
+
     
 });
 
@@ -225,3 +226,35 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
     });
 });
 
+
+var posMarker = L.icon({
+    iconUrl: 'https://toppng.com/uploads/preview/button-icon-bluesky-google-current-location-ico-11562972550n6hrlknyqo.png',
+    //shadowUrl: 'leaf-shadow.png',
+
+    iconSize:     [15, 15], // size of the icon
+    //shadowSize:   [50, 64], 
+    iconAnchor:   [7, 11], // point of the icon which will correspond to marker's location
+    //  shadowAnchor: [4, 62],  
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+L.marker([16.69, 74.23], {icon: posMarker}).addTo(map);
+//L.marker([16.69, 74.23]).addTo(map); // Testing The iconSize of posMarker
+
+
+// function onLocationFound(e) {
+//     var radius = e.accuracy;
+
+//     L.marker(e.latlng, {icon: posMarker}).addTo(map)
+//         .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+//     L.circle(e.latlng, radius).addTo(map);
+// }
+
+// map.on('locationfound', onLocationFound);
+
+// function onLocationError(e) {
+//     alert(e.message);
+// }
+
+// map.on('locationerror', onLocationError);

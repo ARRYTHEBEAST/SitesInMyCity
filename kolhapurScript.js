@@ -145,8 +145,20 @@ var closeButton = document.getElementById('close-button');
 var currentMarker = null;
 
 
+
+
 function zoomToMarkerAndShowOverlay(markerData, marker) {
-    map.setView([markerData.coords[0], markerData.coords[1]], 19, {
+    
+    // Calulate the zoom level
+    var currentZoomLevel = map.getZoom();
+    if (currentZoomLevel > 16 ) {
+    var zoomLevel = currentZoomLevel
+    }
+    else{
+        var zoomLevel = 16
+    }
+
+    map.setView([markerData.coords[0], markerData.coords[1]], zoomLevel, {
         animate: true,
         duration: 1
     });

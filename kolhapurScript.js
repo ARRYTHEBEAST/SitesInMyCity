@@ -112,7 +112,7 @@ aboutButton.addEventListener('click', function () {
 // Add an event listener for the click event
 homeButton.addEventListener('click', function () {
     // Redirect to the "about" page
-    window.location.href = 'home.html'; // Replace 'about.html' with the URL of the page you want to open
+    window.location.href = 'index.html'; // Replace 'about.html' with the URL of the page you want to open
 
 });
 

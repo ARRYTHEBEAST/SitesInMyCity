@@ -1,8 +1,6 @@
-
 // Map initialization 
-var map = L.map('map').setView([16.686875, 74.2272], 14);
-var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-osm.addTo(map);
+const map = L.map('map').setView([16.686875, 74.2272], 14);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 var timePeriods = ['Old', 'Recent', 'Ancient', 'Mideaval']
 
@@ -91,194 +89,106 @@ var markersData = [
 
 ];
 
-const aboutButton = document.querySelector('.navbar button:nth-child(2)'); // Assuming the About button is the second one
-const homeButton = document.querySelector('.navbar button:nth-child(1)'); // Assuming the Home button is the second one
-const mapButton = document.querySelector('.navbar button:nth-child(3)');
-const referenceButton = document.querySelector('.references button:nth-child(1)');
+const [homeButton, aboutButton, mapButton] = document.querySelectorAll('.navbar button');
+const referenceButton = document.querySelector('.references button');
 
-// Add an event listener for the click event
-referenceButton.addEventListener('click', function () {
-    // Redirect to the "about" page
-    window.location.href = 'reference.html'; // Replace 'about.html' with the URL of the page you want to open
+const addButtonListener = (button, url) => {
+    button.addEventListener('click', () => window.location.href = url);
+};
 
-});
+addButtonListener(referenceButton, 'reference.html');
+addButtonListener(aboutButton, 'about.html');
+addButtonListener(homeButton, 'index.html');
 
-// Add an event listener for the click event
-aboutButton.addEventListener('click', function () {
-    // Redirect to the "about" page
-    window.location.href = 'about.html'; // Replace 'about.html' with the URL of the page you want to open
+const tileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 
-});
-// Add an event listener for the click event
-homeButton.addEventListener('click', function () {
-    // Redirect to the "about" page
-    window.location.href = 'index.html'; // Replace 'about.html' with the URL of the page you want to open
-
-});
-
-// Create the tile layer
-var tileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
-
-// Add event listener to the button
-mapButton.addEventListener('click', function () {
+mapButton.addEventListener('click', () => {
     if (map.hasLayer(tileLayer)) {
-        map.removeLayer(tileLayer); // Remove the layer if it's already added
-        mapButton.innerHTML = "Street View"
+        map.removeLayer(tileLayer);
+        mapButton.textContent = "Street View";
     } else {
-        tileLayer.addTo(map); // Add the layer if it's not already added
-        mapButton.innerHTML = "Satellite View"
-
+        tileLayer.addTo(map);
+        mapButton.textContent = "Satellite View";
     }
-
-
 });
 
+const markerNamesList = document.getElementById('markerNames');
+const infoOverlay = document.getElementById('info-overlay');
+const markerTitle = document.getElementById('marker-title');
+const markerInfo = document.getElementById('marker-info');
+const backButton = document.getElementById('back-button');
+const closeButton = document.getElementById('close-button');
 
-// Get the markerNames element
-var markerNamesList = document.getElementById('markerNames');
-var infoOverlay = document.getElementById('info-overlay');
-var markerTitle = document.getElementById('marker-title');
-var markerInfo = document.getElementById('marker-info');
-var backButton = document.getElementById('back-button');
-var closeButton = document.getElementById('close-button');
-
-var currentMarker = null;
-
-
-
+let currentMarker = null;
 
 function zoomToMarkerAndShowOverlay(markerData, marker) {
-    
-    // Calulate the zoom level
-    var currentZoomLevel = map.getZoom();
-    if (currentZoomLevel > 16 ) {
-    var zoomLevel = currentZoomLevel
-    }
-    else{
-        var zoomLevel = 16
-    }
+    const zoomLevel = Math.max(map.getZoom(), 16);
+    map.setView(markerData.coords, zoomLevel, { animate: true, duration: 1 });
 
-    map.setView([markerData.coords[0], markerData.coords[1]], zoomLevel, {
-        animate: true,
-        duration: 1
-    });
-
-    // Store the clicked marker's name in currentMarker
     currentMarker = markerData.name;
 
-    // Show the overlay and update its content
     markerTitle.textContent = markerData.name;
     markerInfo.textContent = markerData.data || "No additional information available.";
-
     infoOverlay.style.display = 'block';
 
-    // Enlarge the marker
-    marker.setIcon(L.icon({
+    const enlargedIcon = L.icon({
         iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-        iconSize: [35, 55], // Enlarged size
-        iconAnchor: [17, 55], // Adjusted anchor for the larger size
+        iconSize: [35, 55],
+        iconAnchor: [17, 55],
         popupAnchor: [1, -34],
         shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
         shadowSize: [41, 41],
         shadowAnchor: [12, 41]
-    }));
+    });
 
-    // Reset the marker size after a delay
-    setTimeout(function () {
+    marker.setIcon(enlargedIcon);
+
+    setTimeout(() => {
         marker.setIcon(L.icon({
             iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-            iconSize: [25, 41], // Original size
+            iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
             shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
             shadowSize: [41, 41],
             shadowAnchor: [12, 41]
         }));
-    }, 500); // Adjust the delay as needed
+    }, 500);
 }
 
-// Add markers and their names to the list
-markersData.forEach(function (markerData) {
-    var marker = L.marker(markerData.coords).addTo(map);
+markersData.forEach(markerData => {
+    const marker = L.marker(markerData.coords).addTo(map);
+    marker.on('click', () => zoomToMarkerAndShowOverlay(markerData, marker));
 
-    // Add click event listener to the marker
-    marker.addEventListener('click', function () {
-        zoomToMarkerAndShowOverlay(markerData, marker);
-    });
-
-    // Add each marker's name to the overlay list
-    var listItem = document.createElement('li');
+    const listItem = document.createElement('li');
     listItem.textContent = markerData.name;
     markerNamesList.appendChild(listItem);
 
-
-    // Zoom to marker when its name is clicked in the list
-    listItem.addEventListener('click', function () {
-        // Zoom to the marker
-        zoomToMarkerAndShowOverlay(markerData, marker)
-    });
+    listItem.addEventListener('click', () => zoomToMarkerAndShowOverlay(markerData, marker));
 });
 
-// Close button functionality
-closeButton.addEventListener('click', function () {
-    infoOverlay.style.display = 'none';
-});
+closeButton.addEventListener('click', () => infoOverlay.style.display = 'none');
+backButton.addEventListener('click', () => infoOverlay.style.display = 'none');
 
-// Back button functionality
-backButton.addEventListener('click', function () {
-    infoOverlay.style.display = 'none';
-});
-
-
-// Add search functionality
-document.getElementById('searchInput').addEventListener('input', function (e) {
-    var searchQuery = e.target.value.toLowerCase();
+document.getElementById('searchInput').addEventListener('input', e => {
+    const searchQuery = e.target.value.toLowerCase();
     markerNamesList.innerHTML = '';
 
-    markersData.forEach(function (markerData) {
+    markersData.forEach(markerData => {
         if (markerData.name.toLowerCase().includes(searchQuery)) {
-            var listItem = document.createElement('li');
+            const listItem = document.createElement('li');
             listItem.textContent = markerData.name;
-
-            listItem.addEventListener('click', function () {
-                // Zoom to the marker
-                zoomToMarkerAndShowOverlay(markerData, marker)
-            });
-
+            listItem.addEventListener('click', () => zoomToMarkerAndShowOverlay(markerData, marker));
             markerNamesList.appendChild(listItem);
         }
     });
 });
 
-
-var posMarker = L.icon({
+const posMarker = L.icon({
     iconUrl: 'https://toppng.com/uploads/preview/button-icon-bluesky-google-current-location-ico-11562972550n6hrlknyqo.png',
-    //shadowUrl: 'leaf-shadow.png',
-
-    iconSize: [15, 15], // size of the icon
-    //shadowSize:   [50, 64], 
-    iconAnchor: [7, 11], // point of the icon which will correspond to marker's location
-    //  shadowAnchor: [4, 62],  
-    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    iconSize: [15, 15],
+    iconAnchor: [7, 11],
+    popupAnchor: [-3, -76]
 });
 
 L.marker([16.69, 74.23], { icon: posMarker }).addTo(map);
-//L.marker([16.69, 74.23]).addTo(map); // Testing The iconSize of posMarker
-
-
-// function onLocationFound(e) {
-//     var radius = e.accuracy;
-
-//     L.marker(e.latlng, {icon: posMarker}).addTo(map)
-//         .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-//     L.circle(e.latlng, radius).addTo(map);
-// }
-
-// map.on('locationfound', onLocationFound);
-
-// function onLocationError(e) {
-//     alert(e.message);
-// }
-
-// map.on('locationerror', onLocationError);

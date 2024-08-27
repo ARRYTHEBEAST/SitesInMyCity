@@ -99,3 +99,18 @@ If you find a bug or have a suggestion for improvement:
 If you have any questions about contributing or the design direction, feel free to open an issue for discussion.
 
 Thank you for contributing to Sites In My City and helping us showcase the beauty and history of our locations!
+
+## Adding a New Site
+
+To add a new site, you'll need to insert a new document into the MongoDB database. Here's an example of how to do this using the MongoDB shell or a MongoDB client:
+
+```javascript
+db.markers.insertOne({
+  coords: [latitude, longitude],
+  name: "Site Name",
+  data: "Description of the site",
+  categories: ['Category1', 'Category2']
+})
+```
+
+You can also create an API endpoint in the server to allow adding new markers programmatically.

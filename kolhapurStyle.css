@@ -80,8 +80,6 @@ body, html {
     color: #007bff;
 }
 
-
-
 #searchInput {
     width: 16vw;
     padding: 10px;
@@ -90,9 +88,6 @@ body, html {
     border-radius: 4px;
     overflow: auto;
 }
-
-
-
 
 .info-overlay {
     position: absolute;
@@ -110,7 +105,6 @@ body, html {
     z-index: 1001;
     display: none;
 }
-
 
 .references {
     position: absolute;
@@ -141,4 +135,57 @@ body, html {
 
 .references button:hover {
     background-color: #0056b3;
+}
+
+/* Add these new styles at the end of your CSS file */
+
+#mobile-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1002;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+    #mobile-toggle {
+        display: block;
+    }
+
+    .overlay {
+        position: fixed;
+        top: auto;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 80%;
+        max-height: 80%;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-out;
+    }
+
+    .overlay.show {
+        transform: translateY(0);
+    }
+
+    #searchInput {
+        width: 90%;
+    }
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+    .mobile-only {
+        display: block;
+    }
 }

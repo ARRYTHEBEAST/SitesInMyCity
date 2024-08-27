@@ -173,7 +173,13 @@ function zoomToMarkerAndShowOverlay(markerData, marker) {
 
 markersData.forEach(markerData => {
     const marker = L.marker(markerData.coords).addTo(map);
-    marker.on('click', () => zoomToMarkerAndShowOverlay(markerData, marker));
+    marker.on('click', () => {
+        zoomToMarkerAndShowOverlay(markerData, marker);
+        if (window.innerWidth <= 767 && window.orientation === 0) {
+            markerList.classList.remove('show');
+            mobileToggle.textContent = 'Show Sites';
+        }
+    });
 
     const listItem = document.createElement('li');
     listItem.textContent = markerData.name;
@@ -207,4 +213,23 @@ const posMarker = L.icon({
 });
 
 L.marker([16.69, 74.23], { icon: posMarker }).addTo(map);
+
+// Add this at the beginning of your script
+const mobileToggle = document.getElementById('mobile-toggle');
+const markerList = document.getElementById('marker-list');
+
+function toggleMobileOverlay() {
+    markerList.classList.toggle('show');
+    mobileToggle.textContent = markerList.classList.contains('show') ? 'Hide Sites' : 'Show Sites';
+}
+
+mobileToggle.addEventListener('click', toggleMobileOverlay);
+
+// Add a resize event listener to handle orientation changes
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 767 || window.orientation !== 0) {
+        markerList.classList.remove('show');
+        mobileToggle.textContent = 'Show Sites';
+    }
+});
 

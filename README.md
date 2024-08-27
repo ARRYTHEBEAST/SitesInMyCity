@@ -6,6 +6,8 @@ This is a website which serves as a repository to list out places of antiquity, 
 
 Check out the website at https://arrythebeast.github.io/sites-in-my-city/
 
+To contribute to the website, check out the Contribute.md file.
+
 Submit Pull Requests to add more places, features and fixes to the website.
 
 ## THE WEBSITE IS INCOMPLETE. WORK IS IN PROGRESS. 

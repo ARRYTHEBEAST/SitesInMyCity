@@ -102,15 +102,30 @@ addButtonListener(homeButton, 'index.html');
 
 const tileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 
-mapButton.addEventListener('click', () => {
+// Function to toggle map view and update localStorage
+function toggleMapView() {
     if (map.hasLayer(tileLayer)) {
         map.removeLayer(tileLayer);
         mapButton.textContent = "Street View";
+        localStorage.setItem('mapView', 'street');
     } else {
         tileLayer.addTo(map);
         mapButton.textContent = "Satellite View";
+        localStorage.setItem('mapView', 'satellite');
     }
-});
+}
+
+// Check localStorage and set initial map view
+const savedMapView = localStorage.getItem('mapView');
+if (savedMapView === 'satellite') {
+    tileLayer.addTo(map);
+    mapButton.textContent = "Satellite View";
+} else {
+    mapButton.textContent = "Street View";
+}
+
+// Add click event listener to toggle map view
+mapButton.addEventListener('click', toggleMapView);
 
 const markerNamesList = document.getElementById('markerNames');
 const infoOverlay = document.getElementById('info-overlay');
@@ -192,3 +207,4 @@ const posMarker = L.icon({
 });
 
 L.marker([16.69, 74.23], { icon: posMarker }).addTo(map);
+

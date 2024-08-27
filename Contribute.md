@@ -21,7 +21,7 @@ When contributing, please keep this design philosophy in mind to ensure consiste
 2. **Clone the Repository:**
    - Use the following command to clone the repository to your local machine:
      ```
-     git clone https://github.com/yourusername/sites-in-my-city.git
+     git clone https://github.com/arrythebeast/sitesinmycity.git
      ```
 
 3. **Create a New Branch:**

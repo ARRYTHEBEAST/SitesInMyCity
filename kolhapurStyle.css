@@ -13,6 +13,7 @@ body, html {
 }
 
 .navbar {
+    min-height: 50px;
     display: flex;
     gap: 10px;
     position: absolute; /* Position navbar over the map */
@@ -234,6 +235,41 @@ body, html {
 }
 
 @media (max-width: 733px) {
+    .draggable-overlay {
+        display: block;
+    }
+}
+
+#desktopMarkerNames, #mobileMarkerNames {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+}
+
+#desktopMarkerNames li, #mobileMarkerNames li {
+    margin-bottom: 1vh;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#desktopMarkerNames li:hover, #mobileMarkerNames li:hover {
+    text-decoration: underline;
+    color: #007bff;
+}
+
+#desktopSearchInput, #mobileSearchInput {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+@media (max-width: 767px) {
+    .overlay {
+        display: none;
+    }
     .draggable-overlay {
         display: block;
     }

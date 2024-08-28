@@ -18,15 +18,20 @@
     <div class="navbar">
        <button>Home</button>
        <button>About</button>
-       <button>Street View</button>
+       <button id="mapButton">Street View</button>
     </div>
     <div id="map"></div>
+    <div id="desktop-overlay" class="overlay">
+        <h2>Sites</h2>
+        <input type="text" id="desktopSearchInput" placeholder="Search markers...">
+        <ul id="desktopMarkerNames"></ul>
+    </div>
     <div id="draggable-overlay" class="draggable-overlay">
         <div id="drag-handle" class="drag-handle"></div>
         <div id="overlay-content" class="overlay-content">
             <h2>Sites</h2>
-            <input type="text" id="searchInput" placeholder="Search markers...">
-            <ul id="markerNames"></ul>
+            <input type="text" id="mobileSearchInput" placeholder="Search markers...">
+            <ul id="mobileMarkerNames"></ul>
         </div>
     </div>
     <div id="info-overlay" class="info-overlay">

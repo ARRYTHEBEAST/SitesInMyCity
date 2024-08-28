@@ -193,6 +193,18 @@ const markerInfo = document.getElementById('marker-info');
 const backButton = document.getElementById('back-button');
 const closeButton = document.getElementById('close-button');
 const mapButton = document.getElementById('mapButton');
+const aboutButton = document.getElementById('aboutButton');
+const homeButton = document.getElementById('homeButton');
+
+// // Add event listeners for About and Home buttons
+aboutButton.addEventListener('click', () => {
+    window.location.href = 'about.html';
+});
+
+homeButton.addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+
 
 let startY, startHeight, currentHeight, windowHeight;
 let isDragging = false;
@@ -282,12 +294,12 @@ function toggleMapView() {
     if (map.hasLayer(satelliteLayer)) {
         map.removeLayer(satelliteLayer);
         map.addLayer(osmLayer);
-        mapButton.textContent = "Satellite";
+        mapButton.textContent = "Street";
         localStorage.setItem('mapView', 'street');
     } else {
         map.removeLayer(osmLayer);
         map.addLayer(satelliteLayer);
-        mapButton.textContent = "Street";
+        mapButton.textContent = "Satellite";
         localStorage.setItem('mapView', 'satellite');
     }
 }

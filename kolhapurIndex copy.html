@@ -9,27 +9,22 @@
     <!-- leaflet css  -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
-    <link rel="stylesheet" href="kolhapurStyle.css">
+    <link rel="stylesheet" href="kolhapurStyle copy.css">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
+    <button id="mobile-toggle" class="mobile-only">Show Sites</button>
     <div class="navbar">
        <button>Home</button>
        <button>About</button>
        <button>Street View</button>
     </div>
     <div id="map"></div>
-    <div id="draggable-overlay" class="draggable-overlay">
-        <div id="drag-handle" class="drag-handle">
-            <i class="fas fa-grip-lines"></i>
-        </div>
-        <div id="overlay-content" class="overlay-content">
-            <h2>Sites</h2>
-            <input type="text" id="searchInput" placeholder="Search markers...">
-            <ul id="markerNames"></ul>
-        </div>
+    <div id="marker-list" class="overlay">
+        <h2>Sites</h2>
+        <input type="text" id="searchInput" placeholder="Search markers...">
+        <ul id="markerNames"></ul>
     </div>
     <div id="info-overlay" class="info-overlay">
         <button id="back-button">Back</button>
@@ -46,4 +41,4 @@
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-<script src="kolhapurScript.js"></script>
+<script src="kolhapurScript copy.js"></script>

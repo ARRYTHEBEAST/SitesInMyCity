@@ -113,6 +113,12 @@ let currentMarker = null;
 
 // Function to zoom to a marker and show its information overlay
 function zoomToMarkerAndShowOverlay(markerData, marker) {
+
+    toggleMobileOverlay();
+    
+
+    //if (window.innerWidth > 767 || window.orientation !== 0) {
+    //setTimeout(() => {
     const zoomLevel = Math.max(map.getZoom(), 18);
     map.setView(markerData.coords, zoomLevel, { animate: true, duration: 1 });
 
@@ -121,11 +127,6 @@ function zoomToMarkerAndShowOverlay(markerData, marker) {
     markerTitle.textContent = markerData.name;
     markerInfo.textContent = markerData.data || "No additional information available.";
     infoOverlay.style.display = 'block';
-
-    // Show the draggable overlay on mobile
-    if (window.innerWidth <= 767) {
-        draggableOverlay.style.height = '30vh';
-    }
 
     // Create an enlarged icon for the selected marker
     const enlargedIcon = L.icon({
@@ -152,12 +153,20 @@ function zoomToMarkerAndShowOverlay(markerData, marker) {
             shadowAnchor: [12, 41]
         }));
     }, 700);   
+ //}, 1000);
 }
 
 // Add markers to the map and create list items for each marker
 markersData.forEach(markerData => {
     const marker = L.marker(markerData.coords).addTo(map);
-    marker.on('click', () => zoomToMarkerAndShowOverlay(markerData, marker));
+    marker.on('click', () => {
+        toggleMobileOverlay();
+        zoomToMarkerAndShowOverlay(markerData, marker);
+        if (window.innerWidth <= 767 && window.orientation === 0) {
+            markerList.classList.remove('show');
+            mobileToggle.textContent = 'Show Sites';
+        }
+    });
 
     const listItem = document.createElement('li');
     listItem.textContent = markerData.name;
@@ -196,53 +205,30 @@ const posMarker = L.icon({
 // Add a marker for the user's position (currently hardcoded)
 L.marker([16.69, 74.23], { icon: posMarker }).addTo(map);
 
-// Adjust overlay on window resize
+// Get references to mobile toggle button and marker list
+const mobileToggle = document.getElementById('mobile-toggle');
+const markerList = document.getElementById('marker-list');
+
+// Function to toggle mobile overlay
+function toggleMobileOverlay() {
+    markerList.classList.toggle('show');
+    mobileToggle.textContent = markerList.classList.contains('show') ? 'Hide Sites' : 'Show Sites';
+}
+
+
+
+// Add click event listener to mobile toggle button
+// This allows users to show/hide the list of sites on mobile devices
+mobileToggle.addEventListener('click', toggleMobileOverlay);
+
+// Add a resize event listener to handle orientation changes
+// This ensures proper display when switching between portrait and landscape modes
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 767) {
-        draggableOverlay.style.display = 'none';
-    } else {
-        draggableOverlay.style.display = 'block';
-        draggableOverlay.style.height = '30vh';
+    // Check if the screen width is greater than 767px (tablet/desktop) or if the device is in landscape mode
+    if (window.innerWidth > 767 || window.orientation !== 0) {
+        // Hide the mobile overlay and reset the button text
+        markerList.classList.remove('show');
+        mobileToggle.textContent = 'Show Sites';
     }
 });
-
-// Add this code at the end of your file
-const draggableOverlay = document.getElementById('draggable-overlay');
-const dragHandle = document.getElementById('drag-handle');
-let startY, startHeight, currentHeight, windowHeight;
-
-function initDrag(e) {
-    startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-    startHeight = draggableOverlay.offsetHeight;
-    windowHeight = window.innerHeight;
-    
-    document.addEventListener('mousemove', doDrag);
-    document.addEventListener('touchmove', doDrag, { passive: false });
-    document.addEventListener('mouseup', stopDrag);
-    document.addEventListener('touchend', stopDrag);
-}
-
-function doDrag(e) {
-    e.preventDefault();
-    const y = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-    currentHeight = startHeight + startY - y;
-    
-    if (currentHeight > windowHeight * 0.3 && currentHeight < windowHeight) {
-        draggableOverlay.style.height = `${currentHeight}px`;
-    }
-}
-
-function stopDrag() {
-    const snapHeight = currentHeight < windowHeight * 0.5 ? '30vh' :
-                       currentHeight < windowHeight * 0.85 ? '70vh' : '100vh';
-    draggableOverlay.style.height = snapHeight;
-    
-    document.removeEventListener('mousemove', doDrag);
-    document.removeEventListener('touchmove', doDrag);
-    document.removeEventListener('mouseup', stopDrag);
-    document.removeEventListener('touchend', stopDrag);
-}
-
-dragHandle.addEventListener('mousedown', initDrag);
-dragHandle.addEventListener('touchstart', initDrag, { passive: false });
 

@@ -3,3 +3,34 @@
 
 }
 
+.references {
+    position: absolute;
+    top: 85vh;
+    right: 2vw;
+    width: 20vw;
+    max-height: 80vh;
+    max-width: 100px;
+    overflow-y: auto;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    
+}
+
+.references button {
+    font-size: medium;
+    padding: 5px 5px; /* Larger padding for a more spacious button */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px; /* Rounded corners for buttons */
+    cursor: pointer;
+    text-align: center; /* Center text inside the button */
+}
+
+.references button:hover {
+    background-color: #0056b3;
+}
+

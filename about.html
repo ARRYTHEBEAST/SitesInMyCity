@@ -13,7 +13,20 @@
     This website was developed by Arjun Rajesh Khamkar, as a service to the wonderful city of Kolhapur. 
     <br>
     <br>The webiste serves to index and organize the various 'sites'; which include everything from heritage, social importance, scenic importance and everythingthat needs documentation but isnt readily documented and even if it is, not properly index to enable quick search.
-    
+    <div class="references">
+        <button id="references"> Show References</button>
+    </div>
     
 </body>
 </html>
+<script>
+    const referenceButton = document.querySelector('.references button');
+
+// Function to add click event listeners to buttons
+const addButtonListener = (button, url) => {
+    button.addEventListener('click', () => window.location.href = url);
+};
+
+// Add click event listeners to buttons
+addButtonListener(referenceButton, 'reference.html');
+</script>

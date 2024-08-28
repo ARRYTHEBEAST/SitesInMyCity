@@ -1,0 +1,192 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's width and height */
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+    position: relative; /* Keep map positioned relative to its container */
+}
+
+.navbar {
+    display: flex;
+    gap: 10px;
+    position: absolute; /* Position navbar over the map */
+    top: 2vh; /* Distance from the top of the viewport */
+    right: 2vw;  /*Distance from the left of the viewport */
+    bottom: 90vh;
+    padding: 5px; /* Add padding inside the navbar for a spacious look */
+    border-radius: 20px; /* High border radius for rounded corners */
+    background-color: rgba(255, 255, 255, 0.9); /* Optional: Add a semi-transparent background */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Optional: Add shadow for better visibility */
+
+    z-index: 1000; /* Ensure it stays on top of the map */
+    box-sizing: border-box; /* Ensure padding doesn’t add to the height */
+}
+
+.navbar button {
+    font-size: medium;
+    padding: 10px 15px; /* Larger padding for a more spacious button */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px; /* Rounded corners for buttons */
+    cursor: pointer;
+    text-align: center; /* Center text inside the button */
+}
+
+.navbar button:hover {
+    background-color: #0056b3;
+}
+
+.overlay {
+    position: absolute;
+    top: 10vh;
+    left: 2vw;
+    width: 20vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    
+}
+
+.overlay h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+#markerNames {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+}
+
+#markerNames li {
+    margin-bottom: 1vh;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#markerNames li:hover {
+    text-decoration: underline;
+    color: #007bff;
+}
+
+#searchInput {
+    width: 16vw;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+.info-overlay {
+    position: absolute;
+    top: 11vh;
+    right: 2vw;
+    width: auto;
+    height: auto;
+    max-width: 30vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    display: none;
+}
+
+.references {
+    position: absolute;
+    top: 85vh;
+    right: 2vw;
+    width: 20vw;
+    max-height: 80vh;
+    max-width: 100px;
+    overflow-y: auto;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    
+}
+
+.references button {
+    font-size: medium;
+    padding: 5px 5px; /* Larger padding for a more spacious button */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px; /* Rounded corners for buttons */
+    cursor: pointer;
+    text-align: center; /* Center text inside the button */
+}
+
+.references button:hover {
+    background-color: #0056b3;
+}
+
+/* Add these new styles at the end of your CSS file */
+
+#mobile-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1002;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+    #mobile-toggle {
+        display: block;
+    }
+
+    .overlay {
+        position: fixed;
+        top: auto;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 80%;
+        max-height: 80%;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-out;
+    }
+
+    .overlay.show {
+        transform: translateY(0);
+    }
+
+    #searchInput {
+        width: 90%;
+    }
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+    .mobile-only {
+        display: block;
+    }
+}

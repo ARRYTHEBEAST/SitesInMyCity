@@ -19,6 +19,7 @@ const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 });
 
+
 // Define markers data
 const markersData = [
     {
@@ -312,9 +313,9 @@ const savedMapView = localStorage.getItem('mapView');
 if (savedMapView === 'satellite') {
     map.removeLayer(osmLayer);
     map.addLayer(satelliteLayer);
-    mapButton.textContent = "Street";
-} else {
     mapButton.textContent = "Satellite";
+} else {
+    mapButton.textContent = "Street";
 }
 
 // Add markers to the map

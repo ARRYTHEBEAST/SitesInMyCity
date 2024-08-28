@@ -1,5 +1,13 @@
 // Initialize the map centered on Kolhapur
-const map = L.map('map').setView([16.686875, 74.2272], 14);
+const map = L.map('map', {
+    zoomControl: false, // Disable default zoom control for custom positioning
+    //tap: true // Enable tap for touch devices
+}).setView([16.686875, 74.2272], 14);
+
+// Add zoom control to the top-right corner
+//L.control.zoom({
+//    position: 'topright'
+//}).addTo(map);
 
 // Add the OpenStreetMap tile layer to the map
 const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -187,9 +195,12 @@ const closeButton = document.getElementById('close-button');
 const mapButton = document.getElementById('mapButton');
 
 let startY, startHeight, currentHeight, windowHeight;
+let isDragging = false;
 
 function initDrag(e) {
-    startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+    e.preventDefault();
+    isDragging = true;
+    startY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
     startHeight = draggableOverlay.offsetHeight;
     windowHeight = window.innerHeight;
     
@@ -200,18 +211,22 @@ function initDrag(e) {
 }
 
 function doDrag(e) {
+    if (!isDragging) return;
     e.preventDefault();
-    const y = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+    const y = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
     currentHeight = startHeight + startY - y;
     
-    if (currentHeight > windowHeight * 0.3 && currentHeight < windowHeight) {
+    if (currentHeight > windowHeight * 0.2 && currentHeight < windowHeight * 0.9) {
         draggableOverlay.style.height = `${currentHeight}px`;
     }
 }
 
 function stopDrag() {
-    const snapHeight = currentHeight < windowHeight * 0.5 ? '30vh' :
-                       currentHeight < windowHeight * 0.85 ? '70vh' : '100vh';
+    if (!isDragging) return;
+    isDragging = false;
+    
+    const snapHeight = currentHeight < windowHeight * 0.4 ? '20vh' :
+                       currentHeight < windowHeight * 0.7 ? '50vh' : '80vh';
     draggableOverlay.style.height = snapHeight;
     
     document.removeEventListener('mousemove', doDrag);
@@ -222,6 +237,9 @@ function stopDrag() {
 
 dragHandle.addEventListener('mousedown', initDrag);
 dragHandle.addEventListener('touchstart', initDrag, { passive: false });
+
+// Prevent default touch behavior on the drag handle
+dragHandle.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
 
 function updateMarkerList(searchQuery = '') {
     desktopMarkerNames.innerHTML = '';
@@ -255,7 +273,7 @@ function zoomToMarkerAndShowOverlay(markerData) {
 
     // Show the draggable overlay on mobile
     if (window.innerWidth <= 767) {
-        draggableOverlay.style.height = '30vh';
+        draggableOverlay.style.height = '20vh';
     }
 }
 
@@ -264,12 +282,12 @@ function toggleMapView() {
     if (map.hasLayer(satelliteLayer)) {
         map.removeLayer(satelliteLayer);
         map.addLayer(osmLayer);
-        mapButton.textContent = "Satellite View";
+        mapButton.textContent = "Satellite";
         localStorage.setItem('mapView', 'street');
     } else {
         map.removeLayer(osmLayer);
         map.addLayer(satelliteLayer);
-        mapButton.textContent = "Street View";
+        mapButton.textContent = "Street";
         localStorage.setItem('mapView', 'satellite');
     }
 }
@@ -282,9 +300,9 @@ const savedMapView = localStorage.getItem('mapView');
 if (savedMapView === 'satellite') {
     map.removeLayer(osmLayer);
     map.addLayer(satelliteLayer);
-    mapButton.textContent = "Street View";
+    mapButton.textContent = "Street";
 } else {
-    mapButton.textContent = "Satellite View";
+    mapButton.textContent = "Satellite";
 }
 
 // Add markers to the map

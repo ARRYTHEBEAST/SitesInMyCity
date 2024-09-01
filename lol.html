@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sites To Visit</title>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <h3>Tasks</h3>
+        
+        <input type="text" id="task-input" placeholder="Enter a new task">
+        <button id="add-task-button">Add Task</button>
+        <ol id="list">
+        </ol>
+        
+    </div>
+</body>
+</html>
+
+<script>
+
+    var list = document.getElementById('list');
+    
+
+    document.getElementById('add-task-button').addEventListener('click', function() {
+        var taskInput = document.getElementById('task-input');
+        var taskText = taskInput.value;
+        if(taskText.trim() !== ""){
+            var li = document.createElement('li');
+            li.textContent = taskText;
+
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.className = 'delete-button';
+            deleteButton.addEventListener('click', function() {
+                li.remove();
+            });
+            li.appendChild(deleteButton);
+
+            var editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.className = 'edit-button';
+            editButton.addEventListener('click', function() {
+                var textInput = document.createElement('input');
+                var saveButton = document.createElement('button');
+                textInput.placeholder = 'Enter new task text:';
+                li.append(textInput);
+                editButton.remove()
+                li.appendChild(saveButton);
+                saveButton.textContent = 'Save';
+                saveButton.addEventListener('click', function() {
+                    li.textContent = textInput.value;
+                });
+                
+
+            });
+            li.appendChild(editButton);
+
+            var completeButton = document.createElement('button');
+            completeButton.textContent = 'Complete';
+            completeButton.className = 'complete-button';
+            completeButton.addEventListener('click', function() {
+                if(li.style.textDecoration === 'line-through'){
+                    li.style.textDecoration = 'none';
+                    li.style.color = 'black';
+                    completeButton.textContent = 'Complete Task';
+                }else{
+                    li.style.textDecoration = 'line-through';
+                    li.style.color = 'green';
+                    completeButton.textContent = 'Incomplete Task';
+                }
+            });
+            li.appendChild(completeButton);
+
+
+
+            
+            document.getElementById('list').appendChild(li);
+            taskInput.value = "";
+        }
+    });
+    
+</script>
